@@ -1,9 +1,13 @@
-import React from 'react'
+import useAuthStore from '@/auth.store';
+import { Redirect, Slot } from 'expo-router';
+import React from 'react';
 
-const Layout = () => {
-  return (
-    <div>Layout</div>
-  )
-}
+const TabLayout = () => {
+  const { isAuthenticated } = useAuthStore();
 
-export default Layout
+  if (!isAuthenticated) return <Redirect href='/sign-in' />;
+
+  return <Slot />;
+};
+
+export default TabLayout;
